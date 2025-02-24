@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://j62f8mxao7ae"]
+
+[ext_resource type="Script" path="res://scenes/rig_definition.gd" id="1_c43tf"]
+[ext_resource type="Script" path="res://scenes/rig.gd" id="1_ji0r1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rqybp"]
+size = Vector3(2, 10, 2)
+
+[node name="Rig" type="Node3D"]
+script = ExtResource("1_ji0r1")
+
+[node name="RigDefinition" type="Node" parent="." node_paths=PackedStringArray("group_rignodes", "group_rigconns")]
+script = ExtResource("1_c43tf")
+group_rignodes = NodePath("../RigNodes")
+group_rigconns = NodePath("../RigConns")
+
+[node name="RigNodes" type="Node3D" parent="."]
+
+[node name="RigConns" type="Node3D" parent="."]
+
+[node name="VisualPlaceholder" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+mesh = SubResource("BoxMesh_rqybp")
+
+[node name="GDRigSystem" type="GDRigSystem" parent="."]

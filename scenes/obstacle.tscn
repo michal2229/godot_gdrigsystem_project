@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5pt17ey6t85k"]
+
+[sub_resource type="GDScript" id="GDScript_splll"]
+script/source = "extends RigidBody3D
+
+@export var p := false
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	custom_integrator = true
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func _physics_process(delta: float) -> void:
+	if p:
+		print(\"_physics_process\")
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if p:
+		print(\"_integrate_forces\")
+	
+	var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
+	
+	state.linear_velocity.y += -gravity * state.step
+	
+	state.transform.origin += state.linear_velocity * state.step
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_klpqw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_iflfv"]
+
+[node name="Obstacle" type="RigidBody3D"]
+mass = 10000.0
+script = SubResource("GDScript_splll")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.861352, 3.48132, -1.1289)
+shape = SubResource("SphereShape3D_klpqw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.861352, 3.48132, -1.1289)
+mesh = SubResource("SphereMesh_iflfv")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.0905757, 1.0183, 0.122103)
+shape = SubResource("SphereShape3D_klpqw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.0905757, 1.0183, 0.122103)
+mesh = SubResource("SphereMesh_iflfv")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.782553, 3.22951, 0.704406)
+shape = SubResource("SphereShape3D_klpqw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.782553, 3.22951, 0.704406)
+mesh = SubResource("SphereMesh_iflfv")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, 1.05345, 2.8882, 0.13806)
+shape = SubResource("SphereShape3D_klpqw")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, 1.05345, 2.8882, 0.13806)
+mesh = SubResource("SphereMesh_iflfv")

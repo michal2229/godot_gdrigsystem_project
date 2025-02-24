@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://gqcmp8g2cgha"]
+
+[ext_resource type="Script" path="res://scenes/rig_node.gd" id="1_0puav"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tqcx"]
+shading_mode = 2
+specular_mode = 2
+albedo_color = Color(0.398406, 0.163746, 0.166659, 1)
+metallic = 0.5
+roughness = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_d6kpy"]
+material = SubResource("StandardMaterial3D_6tqcx")
+radius = 0.1
+height = 0.2
+radial_segments = 4
+rings = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_slc8e"]
+radius = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7iogs"]
+radius = 0.71
+
+[node name="RigNode" type="Node3D"]
+script = ExtResource("1_0puav")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+ignore_occlusion_culling = true
+mesh = SubResource("SphereMesh_d6kpy")
+
+[node name="LabelNode" type="Node3D" parent="."]
+visible = false
+
+[node name="LabelId" type="Label3D" parent="LabelNode"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+pixel_size = 0.001
+no_depth_test = true
+text = "id"
+font_size = 160
+
+[node name="Area3D" type="Area3D" parent="."]
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_slc8e")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+enabled = false
+shape = SubResource("SphereShape3D_7iogs")
+target_position = Vector3(0, 0, 0)
+collide_with_areas = true

@@ -1,0 +1,99 @@
+[gd_scene load_steps=12 format=3 uid="uid://dr7v755y357gw"]
+
+[ext_resource type="PackedScene" uid="uid://j62f8mxao7ae" path="res://scenes/rig.tscn" id="1_shkcn"]
+[ext_resource type="PackedScene" uid="uid://cv4ds0ixm2jxe" path="res://scenes/player.tscn" id="2_s8tjh"]
+[ext_resource type="PackedScene" uid="uid://b5pt17ey6t85k" path="res://scenes/obstacle.tscn" id="3_2knwi"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_s3cjd"]
+
+[sub_resource type="Sky" id="Sky_cqkso"]
+sky_material = SubResource("PhysicalSkyMaterial_s3cjd")
+
+[sub_resource type="Environment" id="Environment_pfx8l"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_cqkso")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mm1mv"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h3ui7"]
+width = 1024
+height = 1024
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_mm1mv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tq2mj"]
+albedo_color = Color(0.699653, 0.699653, 0.699653, 1)
+metallic = 0.23
+metallic_specular = 0.19
+roughness = 0.5
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_h3ui7")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpdlq"]
+material = SubResource("StandardMaterial3D_tq2mj")
+size = Vector3(40, 0.1, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_btlxw"]
+size = Vector3(40, 0.1, 40)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pfx8l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.925548, 0.30509, -0.224235, 0.229262, 0.92289, 0.309376, 0.301332, 0.234934, -0.924124, -3.437, 2.076, 0.056)
+light_color = Color(1, 0.973333, 0.92, 1)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_qpdlq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_btlxw")
+
+[node name="Rigs" type="Node3D" parent="."]
+
+[node name="Rig4" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(0.977279, -0.211749, -0.00935626, 0.211956, 0.976327, 0.0431396, 0, -0.0441425, 0.999025, 7.89239, 1.94703, -2.23003)
+num_levels = 16
+
+[node name="Rig7" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 0.991211, -0.132291, 0, 0.132291, 0.991211, -2.1798, 1.79074, -8.86164)
+num_levels = 16
+
+[node name="Rig5" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(0.997106, -0.0760229, 0, 0.0713653, 0.936017, -0.344643, 0.0262008, 0.343646, 0.938734, 2.90097, 1.56603, -7.51547)
+num_levels = 16
+
+[node name="Rig6" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(0.982245, 0.184402, -0.0345133, -0.187604, 0.96548, -0.180702, 0, 0.183968, 0.982932, -6.02953, 1.07912, -5.82342)
+num_levels = 16
+
+[node name="Rig8" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 0.940341, 0.340232, 0, -0.340232, 0.940341, -1.18814, 1.07912, 1.03817)
+num_levels = 16
+
+[node name="Player" parent="." instance=ExtResource("2_s8tjh")]
+transform = Transform3D(0.656467, 0, -0.754355, 0, 1, 0, 0.754355, 0, 0.656467, -9.79413, 0.0627675, 8.88122)
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="Obstacle15" parent="Obstacles" instance=ExtResource("3_2knwi")]
+transform = Transform3D(-0.0224082, 0, 0.999749, 0, 1, 0, -0.999749, 0, -0.0224082, 13.5024, 29.6422, 7.33987)

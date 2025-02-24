@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://crlsa6hebkm3l"]
+
+[ext_resource type="Script" path="res://scenes/rig_conn.gd" id="1_jwuky"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p1tr"]
+shading_mode = 2
+specular_mode = 2
+albedo_color = Color(0.834614, 0.834614, 0.834614, 1)
+metallic = 0.85
+roughness = 0.14
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cn0lp"]
+material = SubResource("StandardMaterial3D_6p1tr")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 1.0
+radial_segments = 4
+rings = 1
+
+[node name="RigConn" type="Node3D"]
+script = ExtResource("1_jwuky")
+
+[node name="RigConnVisualMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+ignore_occlusion_culling = true
+mesh = SubResource("CylinderMesh_cn0lp")
