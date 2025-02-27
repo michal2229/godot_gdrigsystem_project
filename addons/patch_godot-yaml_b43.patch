@@ -1,0 +1,43 @@
+diff --git a/YAML.gdextension b/YAML.gdextension
+index 20d4318..a742d93 100644
+--- a/YAML.gdextension
++++ b/YAML.gdextension
+@@ -1,7 +1,7 @@
+ [configuration]
+ 
+ entry_symbol = "YAML_library_init"
+-compatibility_minimum = 4.4
++compatibility_minimum = 4.3
+ reloadable = true
+ 
+ [libraries]
+diff --git a/icons/YAML.svg.import b/icons/YAML.svg.import
+index a12d944..795081d 100644
+--- a/icons/YAML.svg.import
++++ b/icons/YAML.svg.import
+@@ -3,15 +3,15 @@
+ importer="texture"
+ type="CompressedTexture2D"
+ uid="uid://bgn3460unxk5i"
+-path="res://.godot/imported/YAML.svg-121fdc80f9b85cebf47dc6e98070a3c1.ctex"
++path="res://.godot/imported/YAML.svg-d8c48e385534c4911b9e0c618d4b2454.ctex"
+ metadata={
+ "vram_texture": false
+ }
+ 
+ [deps]
+ 
+-source_file="res://addons/YAML/icons/YAML.svg"
+-dest_files=["res://.godot/imported/YAML.svg-121fdc80f9b85cebf47dc6e98070a3c1.ctex"]
++source_file="res://addons/godot-yaml/icons/YAML.svg"
++dest_files=["res://.godot/imported/YAML.svg-d8c48e385534c4911b9e0c618d4b2454.ctex"]
+ 
+ [params]
+ 
+diff --git a/src/godot-cpp b/src/godot-cpp
+index 13cd2d9..f3a1a2f 160000
+--- a/src/godot-cpp
++++ b/src/godot-cpp
+@@ -1 +1 @@
+-Subproject commit 13cd2d921c9bdd21869b17e69098e3c586524fdf
++Subproject commit f3a1a2fd458dfaf4de08c906f22a2fe9e924b16f
