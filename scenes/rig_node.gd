@@ -1,4 +1,6 @@
 extends Node3D
+class_name RigNode
+
 
 @onready var shape_cast_3d: ShapeCast3D = $ShapeCast3D
 @onready var label_node: Node3D = $LabelNode
@@ -23,7 +25,7 @@ func __ready() -> void:
 	cam = get_viewport().get_camera_3d()
 	label_id.text = str(id)
 	label_id.visible = false
-	
+
 	#pos = global_position
 	#custom_integrator = true
 
@@ -33,34 +35,37 @@ func __process(delta: float) -> void:
 	label_id.visible = true
 	label_id.text = str(id)
 	label_node.look_at(cam.global_position)
-	
-	
+
+
 func _physics_process(delta: float) -> void:
+	if not is_instance_valid(shape_cast_3d):
+		return
+
 	shape_cast_3d.force_shapecast_update()
 	force = Vector3.ZERO
-	
+
 	if shape_cast_3d.is_colliding():
 		var num_collisions = shape_cast_3d.get_collision_count()
 		for i in range(num_collisions):
 			var collision_body = shape_cast_3d.get_collider(i)
-			
+
 			if get_parent() == collision_body.get_parent().get_parent():
 				continue
-			
+
 			var collision_point = shape_cast_3d.get_collision_point(i)
 			var collision_normal = shape_cast_3d.get_collision_normal(i)
 			var penetration = (shape_cast_3d.shape.radius - (collision_point - global_position).length())
 			var collision_force: Vector3 = penetration * collision_normal * stiffness
-			
+
 			var relative_velocity = velocity
 			if collision_body.has_meta("linear_velocity"):
 				relative_velocity -= collision_body.linear_velocity
-				
+
 			var damping_force = penetration * -relative_velocity * damping
 			apply_force(collision_force + damping_force, collision_point - global_position)
 			if collision_body.has_method("apply_force"):
 				collision_body.apply_force(-collision_force - damping_force, collision_point - global_position)
-			
-			
+
+
 func apply_force(f: Vector3, p: Vector3):
 	force += f

@@ -38,10 +38,12 @@ noise = SubResource("FastNoiseLite_mm1mv")
 albedo_color = Color(0.699653, 0.699653, 0.699653, 1)
 metallic = 0.23
 metallic_specular = 0.19
-roughness = 0.5
+roughness = 0.08
 normal_enabled = true
 normal_texture = SubResource("NoiseTexture2D_h3ui7")
+clearcoat_roughness = 0.11
 uv1_scale = Vector3(50, 50, 50)
+texture_filter = 5
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpdlq"]
 material = SubResource("StandardMaterial3D_tq2mj")
@@ -71,24 +73,16 @@ shape = SubResource("BoxShape3D_btlxw")
 [node name="Rigs" type="Node3D" parent="."]
 
 [node name="Rig4" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(0.977279, -0.211749, -0.00935626, 0.211956, 0.976327, 0.0431396, 0, -0.0441425, 0.999025, 7.89239, 1.94703, -2.23003)
-num_levels = 16
-
-[node name="Rig7" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(1, 0, 0, 0, 0.991211, -0.132291, 0, 0.132291, 0.991211, -2.1798, 1.79074, -8.86164)
+transform = Transform3D(0.977279, -0.211749, -0.00935626, 0.182989, 0.865172, -0.466897, 0.10696, 0.454577, 0.884262, 7.89239, 1.94703, -2.23003)
 num_levels = 16
 
 [node name="Rig5" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(0.997106, -0.0760229, 0, 0.0713653, 0.936017, -0.344643, 0.0262008, 0.343646, 0.938734, 2.90097, 1.56603, -7.51547)
-num_levels = 16
+transform = Transform3D(0.338229, 0, 0.941064, 0, 1, 0, -0.941064, 0, 0.338229, -14.989, 1.34656, 0.978507)
+yaml_rig_def = "res://addons/gdrigsystem/src/rigsystem_lib/src_app/rig_def_test_00.yaml"
 
 [node name="Rig6" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(0.982245, 0.184402, -0.0345133, -0.187604, 0.96548, -0.180702, 0, 0.183968, 0.982932, -6.02953, 1.07912, -5.82342)
-num_levels = 16
-
-[node name="Rig8" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(1, 0, 0, 0, 0.940341, 0.340232, 0, -0.340232, 0.940341, -1.18814, 1.07912, 1.03817)
-num_levels = 16
+transform = Transform3D(0.338229, 0, 0.941064, 0, 1, 0, -0.941064, 0, 0.338229, -7.02235, 1.34656, 2.95336)
+yaml_rig_def = "res://addons/gdrigsystem/src/rigsystem_lib/src_app/rig_def_test_00.yaml"
 
 [node name="Player" parent="." instance=ExtResource("2_s8tjh")]
 transform = Transform3D(0.656467, 0, -0.754355, 0, 1, 0, 0.754355, 0, 0.656467, -9.79413, 0.0627675, 8.88122)

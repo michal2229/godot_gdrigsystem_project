@@ -1,3 +1,6 @@
 [submodule "addons/gdrigsystem"]
 	path = addons/gdrigsystem
 	url = https://github.com/michal2229/gdrigsystem
+[submodule "addons/godot-yaml"]
+	path = addons/godot-yaml
+	url = https://github.com/KoBeWi/Godot-YAML.git
