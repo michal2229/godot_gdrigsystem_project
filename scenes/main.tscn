@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dr7v755y357gw"]
+[gd_scene load_steps=10 format=3 uid="uid://dr7v755y357gw"]
 
+[ext_resource type="Material" uid="uid://bskgybufv5mdr" path="res://materials/new_shader_material_shader.tres" id="1_2qkog"]
 [ext_resource type="PackedScene" uid="uid://j62f8mxao7ae" path="res://scenes/rig.tscn" id="1_shkcn"]
 [ext_resource type="PackedScene" uid="uid://cv4ds0ixm2jxe" path="res://scenes/player.tscn" id="2_s8tjh"]
 [ext_resource type="PackedScene" uid="uid://b5pt17ey6t85k" path="res://scenes/obstacle.tscn" id="3_2knwi"]
@@ -15,42 +16,26 @@ background_energy_multiplier = 2.0
 sky = SubResource("Sky_cqkso")
 ambient_light_source = 3
 reflected_light_source = 2
-tonemap_mode = 3
+tonemap_mode = 4
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mm1mv"]
-noise_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h3ui7"]
-width = 1024
-height = 1024
-seamless = true
-as_normal_map = true
-noise = SubResource("FastNoiseLite_mm1mv")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tq2mj"]
-albedo_color = Color(0.699653, 0.699653, 0.699653, 1)
-metallic = 0.23
-metallic_specular = 0.19
-roughness = 0.08
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_h3ui7")
-clearcoat_roughness = 0.11
-uv1_scale = Vector3(50, 50, 50)
-texture_filter = 5
+adjustment_enabled = true
+adjustment_brightness = 1.06
+adjustment_contrast = 1.6
+adjustment_saturation = 1.35
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpdlq"]
-material = SubResource("StandardMaterial3D_tq2mj")
-size = Vector3(40, 0.1, 40)
+material = ExtResource("1_2qkog")
+size = Vector3(1000, 1, 1000)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_btlxw"]
-size = Vector3(40, 0.1, 40)
+size = Vector3(1000, 1, 1000)
 
 [node name="Main" type="Node3D"]
 
@@ -63,6 +48,7 @@ light_color = Color(1, 0.973333, 0.92, 1)
 shadow_enabled = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_qpdlq")
@@ -73,19 +59,39 @@ shape = SubResource("BoxShape3D_btlxw")
 [node name="Rigs" type="Node3D" parent="."]
 
 [node name="Rig4" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(0.977279, -0.211749, -0.00935626, 0.182989, 0.865172, -0.466897, 0.10696, 0.454577, 0.884262, 7.89239, 1.94703, -2.23003)
-num_levels = 16
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 7.89239, 5.4068, -13.2893)
+num_levels = 24
 
 [node name="Rig5" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(0.338229, 0, 0.941064, 0, 1, 0, -0.941064, 0, 0.338229, -14.989, 1.34656, 0.978507)
+transform = Transform3D(0.338229, 0, 0.941064, 0, 1, 0, -0.941064, 0, 0.338229, -14.989, 2.34656, 0.978507)
 yaml_rig_def = "res://addons/gdrigsystem/src/rigsystem_lib/src_app/rig_def_test_00.yaml"
 
 [node name="Rig6" parent="Rigs" instance=ExtResource("1_shkcn")]
-transform = Transform3D(0.338229, 0, 0.941064, 0, 1, 0, -0.941064, 0, 0.338229, -7.02235, 1.34656, 2.95336)
+transform = Transform3D(0.338229, 0, 0.941064, 0, 1, 0, -0.941064, 0, 0.338229, -7.02235, 2.34656, 2.95336)
 yaml_rig_def = "res://addons/gdrigsystem/src/rigsystem_lib/src_app/rig_def_test_00.yaml"
 
+[node name="Rig" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.739309, 0.0499992, 6.17645)
+state_simulate = false
+
+[node name="Rig7" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751639, 5.83174, -23.2635)
+num_levels = 24
+
+[node name="Rig8" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2448, 5.83174, -19.6951)
+num_levels = 24
+
+[node name="Rig9" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.68036, 5.83174, -23.2014)
+num_levels = 24
+
+[node name="Rig10" parent="Rigs" instance=ExtResource("1_shkcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1344, 5.83174, -13.5199)
+num_levels = 24
+
 [node name="Player" parent="." instance=ExtResource("2_s8tjh")]
-transform = Transform3D(0.656467, 0, -0.754355, 0, 1, 0, 0.754355, 0, 0.656467, -9.79413, 0.0627675, 8.88122)
+transform = Transform3D(0.656467, 0, -0.754355, 0, 1, 0, 0.754355, 0, 0.656467, -12.4814, 5.70739, 15.0079)
 
 [node name="Obstacles" type="Node3D" parent="."]
 

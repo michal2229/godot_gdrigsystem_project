@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd2w12e5tmj2n"]
+
+[ext_resource type="Script" uid="uid://c4hrxtxomvmrp" path="res://scenes/rig_project.gd" id="1_46752"]
+[ext_resource type="PackedScene" uid="uid://j62f8mxao7ae" path="res://scenes/rig.tscn" id="2_2anqn"]
+
+[node name="RigProject" type="Node3D"]
+script = ExtResource("1_46752")
+
+[node name="Rig" parent="." instance=ExtResource("2_2anqn")]

@@ -1,3 +1,4 @@
+@tool
 extends Node
 
 const RIG_NODE = preload("res://scenes/rig_node.tscn")
@@ -10,6 +11,7 @@ const RIG_CONN = preload("res://scenes/rig_conn.tscn")
 var connections = []
 
 func create() -> void:
+	connections = []
 	for i in range(num_levels):
 		connections += [[0 +i*4, 1 +i*4],
 						#[0 +i*4, 2 +i*4],
@@ -47,8 +49,8 @@ func create() -> void:
 				group_rignodes.add_child(node_obj)
 				node_obj.position = Vector3(
 					(j - 0.5) ,
-					(1 + i), 
-					((j ^ k) - 0.5) )
+					(1 + i - 1),
+					((j ^ k) - 0.5) )/2
 
 	var rng = RandomNumberGenerator.new()
 	rng.seed = 32 +  num_levels
@@ -57,6 +59,5 @@ func create() -> void:
 		conn_obj.rig_node_a = group_rignodes.get_children()[c[0]]
 		conn_obj.rig_node_b = group_rignodes.get_children()[c[1]]
 		conn_obj.rest_length = conn_obj.rig_node_a.global_position.distance_to(conn_obj.rig_node_b.global_position) * rng.randf_range(0.99, 1.01)
-		
+
 		group_rigconns.add_child(conn_obj)
-		

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://crlsa6hebkm3l"]
 
-[ext_resource type="Script" path="res://scenes/rig_conn.gd" id="1_jwuky"]
+[ext_resource type="Script" uid="uid://cmjxykusd0of4" path="res://scenes/rig_conn.gd" id="1_jwuky"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6p1tr"]
 shading_mode = 2
@@ -26,3 +26,13 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 ignore_occlusion_culling = true
 gi_mode = 2
 mesh = SubResource("CylinderMesh_cn0lp")
+
+[node name="LabelNode" type="Node3D" parent="."]
+
+[node name="LabelId" type="Label3D" parent="LabelNode"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
+pixel_size = 0.001
+no_depth_test = true
+text = "id"
+font_size = 180

@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dnvhuclkdb2pw"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bskgybufv5mdr"]
 
-[sub_resource type="Shader" id="Shader_ww0gn"]
+[sub_resource type="Shader" id="Shader_6kcdj"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
 
 shader_type spatial;
@@ -30,24 +30,6 @@ void vertex() {
 	UV = UV * uv1_scale.xy + uv1_offset.xy;
 }
 
-float getHeight(vec2 uv, sampler2D u)
-{
-	float h = 0.f; //vec3(0.f,0.f,0.f);// texture(texture_normal, uv).r ;
-	return h;
-}
-
-vec3 getNormal(vec2 uv) {
-    const vec3 off = vec3(-1,0,1);
-    vec2 texelSize = 1.0 / vec2(textureSize(texture_normal, 0));
-	float t = getHeight(uv + vec2(texelSize * vec2(0.0, -1.0)), texture_normal);
-	float r = getHeight(uv + vec2(texelSize * vec2(1.0, 0.0)), texture_normal);
-	float l = getHeight(uv + vec2(texelSize * vec2(-1.0, 0.0)), texture_normal);
-	float b = getHeight(uv + vec2(texelSize * vec2(0.0, 1.0)), texture_normal);
-
-	return -normalize(vec3(2.0 * (r - l), -4.0, 2.0 * (b - t)));
-}
-
-
 void fragment() {
 	vec2 base_uv = UV;
 
@@ -63,14 +45,23 @@ void fragment() {
 	ROUGHNESS = roughness_tex * roughness;
 
 	// Normal Map: Enabled
-	vec3 nor2 = texture(texture_normal, base_uv/10.0f).rgb;
-	NORMAL_MAP = texture(texture_normal, base_uv).rgb; // * vec3(nor2.x, 1.0f, nor2.z)/4.0f;
-	NORMAL_MAP_DEPTH = normal_scale;
+	vec3 nor2 = texture(texture_normal, base_uv*13.0f).rgb;
+	vec3 nor3 = texture(texture_normal, base_uv*105.0f).rgb;
+	vec3 nor4 = texture(texture_normal, base_uv*1017.0f).rgb;
+	vec3 nor5 = texture(texture_normal, base_uv*10107.0f).rgb;
+	NORMAL_MAP = texture(texture_normal, base_uv).rgb*0.2
+		+ vec3(nor2.x, nor2.y, nor2.z)*0.2f
+		+ vec3(nor3.x, nor3.y, nor3.z)*0.2f
+		+ vec3(nor4.x, nor4.y, nor4.z)*0.2f
+		+ vec3(nor5.x, nor5.y, nor5.z)*0.2f;
+	NORMAL_MAP_DEPTH = normal_scale * 3.0f;
 }
 "
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mm1mv"]
 noise_type = 2
+domain_warp_amplitude = 7.985
+domain_warp_fractal_octaves = 10
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h3ui7"]
 width = 1024
@@ -81,16 +72,16 @@ noise = SubResource("FastNoiseLite_mm1mv")
 
 [resource]
 render_priority = 0
-shader = SubResource("Shader_ww0gn")
+shader = SubResource("Shader_6kcdj")
 shader_parameter/albedo = Color(0.699653, 0.699653, 0.699653, 1)
 shader_parameter/point_size = 1.0
-shader_parameter/roughness = 0.5
-shader_parameter/metallic_texture_channel = null
+shader_parameter/roughness = 0.22
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
 shader_parameter/specular = 0.19
 shader_parameter/metallic = 0.23
-shader_parameter/normal_scale = 1.0
-shader_parameter/uv1_scale = Vector3(50, 50, 50)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
 shader_parameter/texture_normal = SubResource("NoiseTexture2D_h3ui7")
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(32, 32, 32)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cv4ds0ixm2jxe"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_kf4by"]
+[ext_resource type="Script" uid="uid://y7qys062bju" path="res://scenes/player.gd" id="1_kf4by"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_haahh"]
 height = 1.8
@@ -10,11 +10,13 @@ height = 1.8
 
 [node name="CharacterBody3D" type="RigidBody3D"]
 mass = 80.0
+gravity_scale = 0.0
 angular_damp = 50.0
 script = ExtResource("1_kf4by")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+gi_mode = 2
 mesh = SubResource("CapsuleMesh_haahh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

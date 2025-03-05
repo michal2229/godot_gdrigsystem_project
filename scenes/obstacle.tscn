@@ -21,11 +21,11 @@ func _physics_process(delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if p:
 		print(\"_integrate_forces\")
-	
+
 	var gravity = ProjectSettings.get_setting(\"physics/3d/default_gravity\")
-	
+
 	state.linear_velocity.y += -gravity * state.step
-	
+
 	state.transform.origin += state.linear_velocity * state.step
 "
 
@@ -34,7 +34,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 [sub_resource type="SphereMesh" id="SphereMesh_iflfv"]
 
 [node name="Obstacle" type="RigidBody3D"]
-mass = 10000.0
+mass = 1000.0
 script = SubResource("GDScript_splll")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -43,6 +43,7 @@ shape = SubResource("SphereShape3D_klpqw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.861352, 3.48132, -1.1289)
+gi_mode = 2
 mesh = SubResource("SphereMesh_iflfv")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
@@ -51,6 +52,7 @@ shape = SubResource("SphereShape3D_klpqw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.0905757, 1.0183, 0.122103)
+gi_mode = 2
 mesh = SubResource("SphereMesh_iflfv")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
@@ -59,6 +61,7 @@ shape = SubResource("SphereShape3D_klpqw")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, -0.782553, 3.22951, 0.704406)
+gi_mode = 2
 mesh = SubResource("SphereMesh_iflfv")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
@@ -67,4 +70,5 @@ shape = SubResource("SphereShape3D_klpqw")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.95436, -0.130271, 0.268749, 0.298658, 0.416282, -0.858786, 0, 0.899855, 0.436189, 1.05345, 2.8882, 0.13806)
+gi_mode = 2
 mesh = SubResource("SphereMesh_iflfv")
